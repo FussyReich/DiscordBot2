@@ -1,7 +1,7 @@
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 
-const file = new AttachmentBuilder('./Ryo-good-pose.gif');
+const file = new AttachmentBuilder('./gifFile/Ryo-good-pose.gif');
 const exampleEmbed = new EmbedBuilder()
 	.setColor('#4c6ca9')
 	.setTitle('使用できるコマンド')

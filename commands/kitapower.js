@@ -5,8 +5,8 @@ module.exports = {
 		.setName('kitapower')
 		.setDescription('オムライスに喜多パワーをかける'),
 	execute: async function(interaction) {
-        const attachment = new AttachmentBuilder('./Ryo-omelet.gif')   
-		await interaction.reply({content:`まろやか！！！`,files: ["./Ryo-omelet.gif"]})
+        const attachment = new AttachmentBuilder('./gifFile/Ryo-omelet.gif')
+		await interaction.reply({content:`まろやか！！！`,files: ["./gifFile/Ryo-omelet.gif"]})
 	},
 };
 

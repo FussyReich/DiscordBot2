@@ -5,7 +5,7 @@ module.exports = {
 		.setName('moneyback')
 		.setDescription('お金を返してもらう'),
 	execute: async function(interaction) {
-        const attachment = new AttachmentBuilder('./Ryo-cat-ear.gif')
-		await interaction.reply({content:`🤥`,files: ["./Ryo-cat-ear.gif"]})
+        const attachment = new AttachmentBuilder('./gifFile/Ryo-cat-ear.gif')
+		await interaction.reply({content:`🤥`,files: ["./gifFile/Ryo-cat-ear.gif"]})
 	},
 };

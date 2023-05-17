@@ -8,6 +8,7 @@ const chaseFile=require('./commands/chase.js');
 const waterplzFile=require('./commands/waterplz.js');
 const buttonFile=require('./commands/button.js');
 const joinFile=require('./commands/join.js')
+const closeFile=require('./commands/close')
 
 const { applicationId, guildId, token } = require('./config.json');
 const { REST, Routes } = require('discord.js');
@@ -38,6 +39,7 @@ client.once(Events.ClientReady, c => {
     commands.push(waterplzFile.data.toJSON())
     commands.push(buttonFile.data.toJSON())
     commands.push(joinFile.data.toJSON())
+    commands.push(closeFile.data.toJSON())
 
     // DiscordのAPIには現在最新のversion10を指定
     const rest = new REST({ version: '10' }).setToken(token);
@@ -165,7 +167,19 @@ client.on(Events.InteractionCreate, async interaction => {
             }
         }else if (interaction.commandName === joinFile.data.name){
             try {
-                await joinFile.execute(interaction);
+                await joinFile.execute(interaction,client);
+            } catch (error) {
+                console.error(error);
+                if (interaction.replied || interaction.deferred) {
+                    await interaction.followUp({ content: 'コマンド実行時にエラーになりました。', ephemeral: true });
+                } else {
+                    await interaction.reply({ content: 'コマンド実行時にエラーになりました。', ephemeral: true });
+                }
+            }
+        }else if (interaction.commandName === closeFile.data.name){
+            try {
+                await closeFile.execute(interaction,client);
+                client.login(token);
             } catch (error) {
                 console.error(error);
                 if (interaction.replied || interaction.deferred) {

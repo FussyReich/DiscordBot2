@@ -1,21 +1,20 @@
 const { SlashCommandBuilder,ButtonBuilder,ButtonStyle,ActionRowBuilder } = require('discord.js');
-import  connection from "./connection.js"
+const connection = require('./connection')
+
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('join')
         .setDescription('ボイスチャンネルに参加します'),
-    execute: async function (interaction) {
-        if (interaction.commandName === connecionFile) {
-            try {
-                await connection(interaction)
-            } catch (error) {
-                console.error(error);
-                if (interaction.replied || interaction.deferred) {
-                    await interaction.followUp({content: 'コマンド実行時にエラーになりました。(joinで)', ephemeral: true});
-                } else {
-                    await interaction.reply({content: 'コマンド実行時にエラーになりました。(joinで)', ephemeral: true});
-                }
+    execute: async function (interaction,client) {
+        try {
+            await connection(interaction,client)
+        } catch (error) {
+            console.error(error);
+            if (interaction.replied || interaction.deferred) {
+                await interaction.followUp({content: 'コマンド実行時にエラーになりました。', ephemeral: true});
+            } else {
+                await interaction.reply({content: 'コマンド実行時にエラーになりました。', ephemeral: true});
             }
         }
     }

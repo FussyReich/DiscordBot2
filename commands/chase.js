@@ -5,7 +5,7 @@ module.exports = {
 		.setName('chase')
 		.setDescription('リョウを追いかける'),
 	execute: async function(interaction) {
-        const attachment = new AttachmentBuilder('./Ryo-escape.gif')
-		await interaction.reply({content:`ダサいからヤダ`,files: ["./Ryo-escape.gif"]})
+        const attachment = new AttachmentBuilder('./gifFile/Ryo-escape.gif')
+		await interaction.reply({content:`ダサいからヤダ`,files: ["./gifFile/Ryo-escape.gif"]})
 	},
 };
