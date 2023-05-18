@@ -179,7 +179,7 @@ client.on(Events.InteractionCreate, async interaction => {
         }else if (interaction.commandName === closeFile.data.name){
             try {
                 await closeFile.execute(interaction,client);
-                client.login(token);
+                await client.login(token);
             } catch (error) {
                 console.error(error);
                 if (interaction.replied || interaction.deferred) {
