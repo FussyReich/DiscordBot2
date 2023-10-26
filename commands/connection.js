@@ -1,11 +1,11 @@
-const { joinVoiceChannel, getVoiceConnection, VoiceConnectionStatus,St} = require('@discordjs/voice');
+const { joinVoiceChannel, VoiceConnectionStatus } = require('@discordjs/voice');
 const {createAudioPlayer,AudioPlayerStatus,createAudioResource,StreamType} = require('@discordjs/voice');
 const axios =require('axios')
-const {PassThrough} = require('stream')
+require('dotenv').config();
 const player = createAudioPlayer()
 
-
-module.exports = async function(interaction,client) {
+try {
+    module.exports = async function(interaction,client) {
     const guild = interaction.guild
     const vc = await guild.members.fetch(interaction.member.id)
     try {
@@ -20,7 +20,16 @@ module.exports = async function(interaction,client) {
 
         const func = async msg => {
             if (msg.guildId === interaction.guildId && msg.channelId === interaction.channelId && !msg.author.bot){
-                await voicevox_yomiage(msg.content)
+                if(String(msg.content).length<150){
+                    try {
+                        await voicevox_yomiage(msg.content)
+                    } catch (error) {
+                        console.error(error)
+                    }
+                }else{
+                    return
+                }
+                
             }
         }
 
@@ -38,7 +47,7 @@ module.exports = async function(interaction,client) {
         async function msg_text(msg){
             if(msg.indexOf('<') !== -1){
                 console.log(msg)
-                msg = msg.replace(/[0-9０-９]/g, ' ').replace('<',' ').replace(':',' ').replace('>',' ')
+                msg = msg.replace(/[0-90-9]/g, ' ').replace('<',' ').replace(':',' ').replace('>',' ')
             }
 
             if(msg.indexOf('http') !== -1){
@@ -57,13 +66,13 @@ module.exports = async function(interaction,client) {
          * @returns AudioData
          */
         async function speakTextUsingVoicevox(msg) {
-            const rpc = axios.create({ baseURL: 'http://localhost:50021', proxy: false });
+            const rpc = axios.create({ baseURL: `${process.env.baseURL}`, proxy: false });
             const audio_query = await rpc.post('audio_query', {}, {
                 params: {
                     text: msg,
                     speaker: 1,
                 }
-            });
+            },timeout=(10.0, 300.0));
             console.log("[ " + msg + " ]" + "===> VOICEVOX API");
             let requestBody = {
                 ...audio_query.data,
@@ -120,4 +129,6 @@ module.exports = async function(interaction,client) {
         console.error(error);
     }
 }
-
+} catch (error) {
+    console.error(error);
+}

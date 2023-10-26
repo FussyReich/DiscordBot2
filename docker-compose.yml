@@ -1,0 +1,13 @@
+version: "3"
+services:
+  discord-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+  voicevox-engine:
+    container_name: voicevox-engine
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    restart: always
+    ports:
+      - "50021:50021"
+    tty: true

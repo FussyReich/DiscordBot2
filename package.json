@@ -1,10 +1,13 @@
 {
-  "name": "my-discord-bot",
+  "name": "discord-bot2",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "21.0.0"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +16,11 @@
     "@discordjs/voice": "^0.16.0",
     "axios": "^1.4.0",
     "discord.js": "^14.8.0",
+    "dotenv": "^16.3.1",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.1.0",
-    "libsodium-wrappers": "^0.7.11"
+    "fluent-ffmpeg": "^2.1.2",
+    "opusscript": "0.1.1",
+    "tweetnacl": "^1.0.3"
   }
 }

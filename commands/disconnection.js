@@ -1,7 +1,8 @@
 const { getVoiceConnection } = require('@discordjs/voice');
 //const connectionFile=require('./connection')
 
-module.exports = async function(interaction,vc){
+try {
+    module.exports = async function(interaction,vc){
     try {
         const connection = getVoiceConnection(vc.voice.channel.id.guild.id);
     }catch (error){
@@ -13,3 +14,6 @@ module.exports = async function(interaction,vc){
         }
     }
 };
+} catch (error) {
+    console.error(error)
+}
